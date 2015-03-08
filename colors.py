@@ -105,15 +105,13 @@ def process(samplerate, waveform, filename):
     highfrq = 15000
     start_time = 0
     # end_time to -1 for (mostly) whole song
-    end_time = -1
+    end_time = 5
 
     # inital....
     ft_len = None
     len_data = len(waveform)
     # floored number of seconds for integer value
     seconds_in_z = int(pylab.floor(len_data / samplerate))
-
-    nv = 1
 
     # per-second ft in range [start_time, end_time - 1]
     for i in range(start_time, end_time if end_time != -1 else seconds_in_z):
@@ -122,24 +120,15 @@ def process(samplerate, waveform, filename):
         if (not i):
             print("hahah")
             ft = fft_magnitude(get_fft(waveform, i, samplerate))
-            if (nv):
-                ft = ft.flatten('F')
-                left_channel = ft[:samplerate]
-                right_channel = ft[samplerate:]
-            else:
-                ft_len = len(ft)
-                left_channel = [ft[j][0] for j in range(ft_len)]
-                right_channel = [ft[j][1] for j in range(ft_len)]
+            ft = ft.flatten('F')
+            left_channel = ft[:samplerate]
+            right_channel = ft[samplerate:]
         # otherwise append
         else:
             ft = fft_magnitude(get_fft(waveform, i, samplerate))
-            if (nv):
-                ft = ft.flatten('F')
-                left_channel += ft[:samplerate]
-                right_channel += ft[samplerate:]
-            else:
-                left_channel = [left_channel[j] + ft[j][0] for j in range(ft_len)]
-                right_channel = [right_channel[j] + ft[j][1] for j in range(ft_len)]
+            ft = ft.flatten('F')
+            left_channel += ft[:samplerate]
+            right_channel += ft[samplerate:]
 
     # and the last bit beyond an integer second
     # neglected for now
@@ -166,6 +155,7 @@ def process(samplerate, waveform, filename):
     left = zip(frq_dom, left_channel_bins)
     right = zip(frq_dom, right_channel_bins)
     # start with highest
+    #return left
     left = sorted(left, key=lambda val: val[1], reverse=True)
     right = sorted(right, key=lambda val: val[1], reverse=True)
 
