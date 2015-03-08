@@ -105,10 +105,9 @@ def process(samplerate, waveform, filename):
     highfrq = 15000
     start_time = 0
     # end_time to -1 for (mostly) whole song
-    end_time = 5
+    end_time = 12
 
     # inital....
-    ft_len = None
     len_data = len(waveform)
     # floored number of seconds for integer value
     seconds_in_z = int(pylab.floor(len_data / samplerate))
@@ -134,8 +133,6 @@ def process(samplerate, waveform, filename):
     # neglected for now
     extra = nf.rfft(waveform[seconds_in_z*samplerate:])
     mapping_constant = samplerate / len(extra)
-
-
 
 
     print("finished! organizing")
