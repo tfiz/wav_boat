@@ -12,9 +12,9 @@ Left channel is up right channel is down.
 
 And sometimes it looks like a boat.
 
-'''Shell
+```Shell
 python wav_boat.py (filename) [start time] [end time]
-'''
+```
 
 If no start time specified then a random number is picked and the interval
 is one second long.
