@@ -1,10 +1,10 @@
 from __future__ import print_function
 
 import sys
-import scipy.io.wavfile
 import pylab
 import random
 
+from scipy.io import wavfile as iowav
 from numpy import fft as nf
 
 # offset is starting point in units of samplerates
@@ -159,7 +159,7 @@ def process(samplerate, waveform, start_time, end_time):
 
 def to_file(filename_wav, start_time, end_time):
     print("attempting to open")
-    [samplerate, data] = scipy.io.wavfile.read(filename_wav)
+    [samplerate, data] = iowav.read(filename_wav)
     print("success! we'll try to process")
     # random second interval if start_time is -1
     if (start_time == -1):
