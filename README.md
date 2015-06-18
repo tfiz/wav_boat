@@ -1,5 +1,5 @@
 # wav_boat
-"picture of a wav file that sometimes looks like a boat"
+waveform -> picture
 
 Takes a wav file and an [optional] time interval and generates a picture about the
 wav file provided.
